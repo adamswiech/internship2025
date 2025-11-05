@@ -1,0 +1,29 @@
+﻿@model IEnumerable<WebApplication2.Models.Person>   
+
+@{
+    ViewData["Title"] = "Tabela";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>imię</th>
+            <th>nazwisko</th>
+            <th>pesel</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var osoba in Model)
+        {
+            <tr>
+                <td>@osoba.Id</td>
+                <td>@osoba.Name</td>
+                <td>@osoba.Surname</td>
+                <td>@osoba.Pesel</td>
+            </tr>
+        }
+    </tbody>
+</table>
