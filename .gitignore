@@ -2,6 +2,61 @@
 # Ten plik .gitignore został utworzony automatycznie przez Microsoft(R) Visual Studio.
 ################################################################################
 
+<<<<<<< HEAD
 /.vs
 /Adam/AspMvcDemo/.vs
 /Timur/WebApplication2/.vs
+=======
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# NuGet Packages
+*.nupkg
+# NuGet Symbol Packages
+*.snupkg
+
+# Others
+~$*
+*~
+CodeCoverage/
+
+# MSBuild Binary and Structured Log
+*.binlog
+
+# MSTest test Results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+# NUnit
+*.VisualState.xml
+TestResult.xml
+nunit-*.xml
+/Adam/AspMvcDemo/.vs/AspMvcDemo
+/.vs
+/Adam/AspMvcDemo/.vs/ProjectEvaluation
+/Julian Fałat/.vs
+/Julian Fałat/MVC-TEST/.vs
+/Julian Fałat/MVC-TEST/MVC-TEST/.vs
+>>>>>>> 22cf5479f212ff9fc1f331dd240b0fb3d4552566
+/Julian Fałat/MVC-TEST
