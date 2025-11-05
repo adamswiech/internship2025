@@ -1,0 +1,13 @@
+﻿@model IEnumerable<MVC_TEST.Models.Person>
+@{
+    ViewData["Title"] = "Testowy";
+}
+<ul>
+        @foreach (var person in Model)
+        {
+            <li>
+                Name:<strong>@person.Name</strong>
+                Age:<strong> @person.Age</strong>
+            </li>
+        }
+</ul>

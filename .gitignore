@@ -53,3 +53,8 @@ CodeCoverage/
 TestResult.xml
 nunit-*.xml
 /Adam/AspMvcDemo/.vs/AspMvcDemo
+/.vs
+/Adam/AspMvcDemo/.vs/ProjectEvaluation
+/Julian Fałat/.vs
+/Julian Fałat/MVC-TEST/.vs
+/Julian Fałat/MVC-TEST/MVC-TEST/.vs
