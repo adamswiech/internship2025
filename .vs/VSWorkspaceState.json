@@ -1,14 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Adam",
     "\\Timur",
     "\\Timur\\WebApplication2",
     "\\Timur\\WebApplication2\\WebApplication2",
-    "\\Timur\\WebApplication2\\WebApplication2\\Controllers",
-    "\\Timur\\WebApplication2\\WebApplication2\\Views",
-    "\\Timur\\WebApplication2\\WebApplication2\\Views\\Home"
+    "\\Timur\\WebApplication2\\WebApplication2\\Controllers"
   ],
-  "SelectedNode": "\\Timur\\WebApplication2\\WebApplication2\\Views\\Home\\Tabela.cshtml",
+  "SelectedNode": "\\Timur",
   "PreviewInSolutionExplorer": false
 }
