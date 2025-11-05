@@ -14,9 +14,6 @@
                 new Person { Id = 2, Name = "Anna", Surname = "Nowak", Pesel = "92030554321" },
                 new Person { Id = 3, Name = "Piotr", Surname = "Wiśniewski", Pesel = "88071298765" }
             };
-
-
-
         }
     };
 }
