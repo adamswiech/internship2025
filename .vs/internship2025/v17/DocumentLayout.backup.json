@@ -24,14 +24,20 @@
               "RelativeDocumentMoniker": "Timur\\WebApplication2\\WebApplication2\\Controllers\\HomeController.cs",
               "ToolTip": "C:\\Users\\TKradetskyi\\source\\repos\\Internship2025\\Timur\\WebApplication2\\WebApplication2\\Controllers\\HomeController.cs",
               "RelativeToolTip": "Timur\\WebApplication2\\WebApplication2\\Controllers\\HomeController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-05T10:45:29.489Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-05T10:45:29.489Z"
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{56df62a4-05a3-4e5b-aa1a-99371ccfb997}"
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
             }
           ]
         }
