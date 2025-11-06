@@ -22,7 +22,7 @@ namespace webowka1.Controllers
         // GET: Coi
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Co.ToListAsync());
+            return View(await _context.OsadzeniTablica.ToListAsync());
         }
 
         // GET: Coi/Details/5
@@ -33,7 +33,7 @@ namespace webowka1.Controllers
                 return NotFound();
             }
 
-            var co = await _context.Co
+            var co = await _context.OsadzeniTablica
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (co == null)
             {
@@ -54,7 +54,7 @@ namespace webowka1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Pseudonim,Imie,Nazwisko,Wyrok")] Co co)
+        public async Task<IActionResult> Create([Bind("Id,Pseudonim,Imie,Nazwisko,Wyrok")] Models.Co co)
         {
             if (ModelState.IsValid)
             {
@@ -73,7 +73,7 @@ namespace webowka1.Controllers
                 return NotFound();
             }
 
-            var co = await _context.Co.FindAsync(id);
+            var co = await _context.OsadzeniTablica.FindAsync(id);
             if (co == null)
             {
                 return NotFound();
@@ -86,7 +86,7 @@ namespace webowka1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Pseudonim,Imie,Nazwisko,wyrok")] CoController co)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Pseudonim,Imie,Nazwisko,Wyrok")] Models.Co co)
         {
             if (id != co.Id)
             {
@@ -124,7 +124,7 @@ namespace webowka1.Controllers
                 return NotFound();
             }
 
-            var co = await _context.Co
+            var co = await _context.OsadzeniTablica
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (co == null)
             {
@@ -139,10 +139,10 @@ namespace webowka1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var co = await _context.Co.FindAsync(id);
+            var co = await _context.OsadzeniTablica.FindAsync(id);
             if (co != null)
             {
-                _context.Co.Remove(co);
+                _context.OsadzeniTablica.Remove(co);
             }
 
             await _context.SaveChangesAsync();
@@ -151,7 +151,7 @@ namespace webowka1.Controllers
 
         private bool CoExists(int id)
         {
-            return _context.Co.Any(e => e.Id == id);
+            return _context.OsadzeniTablica.Any(e => e.Id == id);
         }
     }
 }

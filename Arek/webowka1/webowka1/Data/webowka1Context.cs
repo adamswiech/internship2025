@@ -14,6 +14,6 @@ namespace webowka1.Data
         {
         }
 
-        public DbSet<webowka1.Models.Co> Co { get; set; } = default!;
+        public DbSet<webowka1.Models.Co> OsadzeniTablica { get; set; } = default!;
     }
 }

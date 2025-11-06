@@ -2,7 +2,7 @@
 
 namespace webowka1.Controllers
 {
-    public class CoController : Controller
+    public class Co : Controller
     {
         public int Id { get; internal set; }
 
