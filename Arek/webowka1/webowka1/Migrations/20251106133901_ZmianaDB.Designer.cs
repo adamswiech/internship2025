@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using webowka1.Data;
 
@@ -10,9 +11,11 @@ using webowka1.Data;
 namespace webowka1.Migrations
 {
     [DbContext(typeof(webowka1Context))]
-    partial class webowka1ContextModelSnapshot : ModelSnapshot
+    [Migration("20251106133901_ZmianaDB")]
+    partial class ZmianaDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
