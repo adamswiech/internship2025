@@ -1,3 +1,6 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using MVC_TEST.Data;
 namespace MVC_TEST
 {
     public class Program
@@ -5,6 +8,8 @@ namespace MVC_TEST
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            builder.Services.AddDbContext<MVC_TESTContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("MVC_TESTContext") ?? throw new InvalidOperationException("Connection string 'MVC_TESTContext' not found.")));
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
