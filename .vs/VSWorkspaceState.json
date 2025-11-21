@@ -1,6 +1,12 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\PathfindingFullStack",
+    "\\Timur",
+    "\\Timur\\WebApplication2",
+    "\\Timur\\WebApplication2\\WebApplication2",
+    "\\Timur\\WebApplication2\\WebApplication2\\Controllers"
   ],
+  "SelectedNode": "\\PathfindingFullStack\\PathfindingFullStack.sln",
   "PreviewInSolutionExplorer": false
 }
