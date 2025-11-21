@@ -1,0 +1,31 @@
+body{
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+#duzyBen{
+  margin-top: 10px;
+  height: 500px;
+  width: 500px;
+  display: flex;
+  flex-wrap: wrap;
+  outline: 1px solid black;
+}
+.pole{
+  width:  50px;
+  height: 50px;
+  outline: 1px solid black;
+}
+
+.przeszkoda{
+  background-color: black;
+}
+
+.dijkstra{
+  background-image: url("assets/dijkstra.png");
+  background-size: cover;
+}
+.filippa{
+  background-image: url("assets/filippa.png");
+  background-size: cover;
+}
