@@ -11,14 +11,12 @@ namespace PathfindingFullStack.Server
             builder.Services.AddCors(options =>
             {
                 options.AddDefaultPolicy(policy =>
-                    policy.WithOrigins("http://localhost:5174") // <-- frontend
+                    policy.WithOrigins("http://localhost:5173") // <-- frontend
                           .AllowAnyHeader()
                           .AllowAnyMethod());
             });
 
             List<Point> board = new List<Point>(PathfindingAlgorithm.FindPath(10, 10)); 
-
-
 
             builder.Services.AddControllers();
             

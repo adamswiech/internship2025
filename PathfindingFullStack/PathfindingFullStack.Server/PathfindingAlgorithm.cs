@@ -27,8 +27,8 @@ namespace PathfindingFullStack.Server
             targetPosition[1] = 6;
 
             
-            if (board[board.FindIndex(p => p.XPossiton == startingPosition[0] && p.YPossiton == startingPosition[1])].value == 0 
-                && board[board.FindIndex(p => p.XPossiton == targetPosition[0] && p.YPossiton == targetPosition[1])].value == 0)
+            if (board[board.FindIndex(p => p.XPosition == startingPosition[0] && p.YPosition == startingPosition[1])].value == 0 
+                && board[board.FindIndex(p => p.XPosition == targetPosition[0] && p.YPosition == targetPosition[1])].value == 0)
             {
 
                 List<nod> openList = new List<nod>();
@@ -52,7 +52,7 @@ namespace PathfindingFullStack.Server
                         int newX = currentNode.x + directions[i, 0];
                         int newY = currentNode.y + directions[i, 1];
                         if (newX >= 0 && newX < 10 && newY >= 0 && newY < 10 && 
-                            board[board.FindIndex(p => p.XPossiton == newX && p.YPossiton == newY)].value == 0)
+                            board[board.FindIndex(p => p.XPosition == newX && p.YPosition == newY)].value == 0)
                         {
                             if (closedList.Any(n => n.x == newX && n.y == newY))
                                 continue;
@@ -78,7 +78,7 @@ namespace PathfindingFullStack.Server
                     nod pathNode = closedList.First(n => n.x == targetPosition[0] && n.y == targetPosition[1]);
                     while (pathNode != null)
                     {
-                        board[board.FindIndex(p => p.XPossiton == pathNode.x && p.YPossiton == pathNode.y)].value = 2;
+                        board[board.FindIndex(p => p.XPosition == pathNode.x && p.YPosition == pathNode.y)].value = 2;
                         pathNode = pathNode.parent;
                     }
                 }
@@ -86,7 +86,7 @@ namespace PathfindingFullStack.Server
                 {
                     for (int j = 0; j < 10; j++)
                     {
-                        Console.Write(board[board.FindIndex(p => p.XPossiton == i && p.YPossiton == j)].value + " ");
+                        Console.Write(board[board.FindIndex(p => p.XPosition == i && p.YPosition == j)].value + " ");
                     }
                     Console.WriteLine();
                 }
