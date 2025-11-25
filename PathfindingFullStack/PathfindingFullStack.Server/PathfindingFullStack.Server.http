@@ -1,0 +1,6 @@
+@PathfindingFullStack.Server_HostAddress = http://localhost:5251
+
+GET {{PathfindingFullStack.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
