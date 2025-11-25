@@ -24,14 +24,16 @@ namespace PathfindingFullStack.Server
             
             var app = builder.Build();
 
+            
             app.MapPost("/api/path", async (Data payload) =>
             {
                 Console.WriteLine($"START: {payload.start?.XPosition}, {payload.start?.YPosition}");
-                return Results.Ok(new { received = payload });
+                List<Point> board = new List<Point>(PathfindingAlgorithm.FindPath(payload.height, payload.width,payload.start,payload.end,payload.obstacles));
+                return Results.Ok(new { received = payload , board = board});
             });
             
 
-            List<Point> board = new List<Point>(PathfindingAlgorithm.FindPath(10, 10));
+            
             app.UseCors();
             app.UseDefaultFiles();
             app.MapStaticAssets();
@@ -50,7 +52,7 @@ namespace PathfindingFullStack.Server
 
             app.MapGet("/api/board", () =>
             {
-                return board;
+                //return board;
             });
             app.MapFallbackToFile("/index.html");
 
