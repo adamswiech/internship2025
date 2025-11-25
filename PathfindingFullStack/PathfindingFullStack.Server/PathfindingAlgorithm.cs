@@ -86,12 +86,14 @@ namespace PathfindingFullStack.Server
                         board[board.FindIndex(p => p.XPosition == pathNode.x && p.YPosition == pathNode.y)].value = 2;
                         pathNode = pathNode.parent;
                     }
+                    board[board.FindIndex(p => p.XPosition == startingPosition.XPosition && p.YPosition == startingPosition.YPosition)].value = 0;
+                    board[board.FindIndex(p => p.XPosition == targetPosition.XPosition && p.YPosition == targetPosition.YPosition)].value = 0;
                 }
                 
             }
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < width; i++)
             {
-                for (int j = 0; j < 10; j++)
+                for (int j = 0; j < height; j++)
                 {
                     Console.Write(board[board.FindIndex(p => p.XPosition == i && p.YPosition == j)].value + " ");
                 }
