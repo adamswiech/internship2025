@@ -56,7 +56,25 @@ namespace PathfindingFullStack.Server
                     {
                         int newX = currentNode.x + directions[i, 0];
                         int newY = currentNode.y + directions[i, 1];
-                        if (newX >= 0 && newX < 10 && newY >= 0 && newY < 10 && 
+
+                        // BLOKADA SKOSÓW
+                        bool isDiagonal = Math.Abs(directions[i, 0]) == 1 && Math.Abs(directions[i, 1]) == 1;
+
+                        if (isDiagonal)
+                        {
+                            int checkX1 = currentNode.x + directions[i, 0];
+                            int checkY1 = currentNode.y;
+
+                            int checkX2 = currentNode.x;
+                            int checkY2 = currentNode.y + directions[i, 1];
+
+                            if (obstacle.Any(p => p.XPosition == checkX1 && p.YPosition == checkY1) ||
+                                obstacle.Any(p => p.XPosition == checkX2 && p.YPosition == checkY2))
+                            {
+                                continue; // nie pozwól wejść diagonalnie
+                            }
+                        }    
+                        if (newX >= 0 && newX < width && newY >= 0 && newY < height && 
                             board[board.FindIndex(p => p.XPosition == newX && p.YPosition == newY)].value == 0)
                         {
                             if (closedList.Any(n => n.x == newX && n.y == newY))
