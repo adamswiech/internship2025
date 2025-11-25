@@ -2,10 +2,10 @@
 {
     public class Data
     {
-        public int width;
-        public int height;
-        public Point start;
-        public Point end;
-        public List<Point> obstacles;
+        public int width { get; set; }
+        public int height { get; set; }
+        public Point start { get; set; }
+        public Point end { get; set; }
+        public List<Point> obstacles { get; set; }
     }
 }

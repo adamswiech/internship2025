@@ -5,7 +5,8 @@
         public int XPosition { get; set; }
         public int YPosition { get; set; }
 
-        public int value { get; set; } 
+        public int value { get; set; }
+        public Point() { }
         public Point(int x, int y)
         {
             XPosition   = x;

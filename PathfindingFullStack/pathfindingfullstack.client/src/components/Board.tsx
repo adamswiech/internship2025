@@ -75,20 +75,21 @@ export default function Board({ height, width }: BoardSize) {
         const obstacles = fields
             .filter(f => f.className.includes("przeszkoda"))
             .map(f => ({
-                x: Math.floor(f.id / width),
-                y: f.id % width
+                XPosition: Math.floor(f.id / width),
+                YPosition: f.id % width,
+                value:0
             }));
 
         const payload = {
             width,
             height,
             start: {
-                x: Math.floor(posDijkstra.id / width),
-                y: posDijkstra.id % width,
+                XPosition: Math.floor(posDijkstra.id / width),
+                YPosition: posDijkstra.id % width,
             },
             end: {
-                x: Math.floor(posFilippa.id / width),
-                y: posFilippa.id % width,
+                XPosition: Math.floor(posFilippa.id / width),
+                YPosition: posFilippa.id % width,
             },
             obstacles
         };

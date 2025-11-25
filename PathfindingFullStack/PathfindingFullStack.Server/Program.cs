@@ -26,8 +26,11 @@ namespace PathfindingFullStack.Server
 
             app.MapPost("/api/path", async (Data payload) =>
             {
+                Console.WriteLine($"START: {payload.start?.XPosition}, {payload.start?.YPosition}");
                 return Results.Ok(new { received = payload });
             });
+            
+
             List<Point> board = new List<Point>(PathfindingAlgorithm.FindPath(10, 10));
             app.UseCors();
             app.UseDefaultFiles();
