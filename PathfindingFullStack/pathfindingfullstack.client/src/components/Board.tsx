@@ -11,9 +11,17 @@ interface BoardSize {
     width: number;
 }
 
+interface Point {
+    xPosition: number;
+    yPosition: number;
+    value: number;
+}
+
 export default function Board({ height, width }: BoardSize) {
     const [fields, setFields] = useState<Field[]>([]);
     const [disabled, setDisabled] = useState(true);
+    const [path, setPath] = useState<Point[]>([]);
+
     const size = height * width;
 
     function generateBoard(): Field[] {
@@ -47,37 +55,37 @@ export default function Board({ height, width }: BoardSize) {
 
         setFields(newArr);
     }
+
     function resetBoard() {
         const board = generateBoard();
         setFields(board);
+        setPath([]);
     }
 
     function Choosing() {
-        if (disabled == true)
-            setDisabled(false);
-        else
-            setDisabled(true);
+        setDisabled(!disabled);
     }
 
     function setObs(id: number) {
         const newArr = [...fields];
-        if (newArr[id].className == "pole")
+        if (newArr[id].className === "pole")
             newArr[id].className = "przeszkoda";
-        else if (newArr[id].className == "przeszkoda")
+        else if (newArr[id].className === "przeszkoda")
             newArr[id].className = "pole";
 
         setFields(newArr);
-
     }
+
     async function sendToBackend() {
         const posDijkstra = fields.find(f => f.className.includes("dijkstra"))!;
         const posFilippa = fields.find(f => f.className.includes("filippa"))!;
+
         const obstacles = fields
             .filter(f => f.className.includes("przeszkoda"))
             .map(f => ({
                 XPosition: Math.floor(f.id / width),
                 YPosition: f.id % width,
-                value:0
+                value: 0
             }));
 
         const payload = {
@@ -94,22 +102,65 @@ export default function Board({ height, width }: BoardSize) {
             obstacles
         };
 
-        console.log("Sending:", payload);
-
         const res = await fetch("http://localhost:5251/api/path", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload),
         });
 
-        const path = await res.json();
-        console.log("received path:", path);
+        const path: { board: Point[] } = await res.json();
+        const found = path.board.filter((p: Point) => p.value === 2);
+        setPath(found);
+        console.log("Received path:", path.board);
+        path.board.forEach((p, i) => {
+        console.log(`Point ${i}:`, p, "X:", p.xPosition, "Y:", p.yPosition);
+        drawPath();
+        });
+    }
+    function drawPath() {
+        const newArr = [...fields];
+
+        path.forEach(p => {
+            const id = p.xPosition * width + p.yPosition;
+            if (!newArr[id].className.includes("dijkstra") &&
+                !newArr[id].className.includes("filippa")) {
+                newArr[id].className += " sciezka";
+            }
+        });
+
+        setFields(newArr);
     }
 
     useEffect(() => {
         const board = generateBoard();
         setFields(board);
+        setPath([]);
     }, [height, width]);
+
+    useEffect(() => {
+    if (path.length === 0) return;
+
+    setFields(prevFields => {
+        const newArr = [...prevFields];
+
+        path.forEach(p => {
+            const id = p.xPosition * width + p.yPosition;
+
+            if (!newArr[id]) {
+                console.log("Warning: field undefined for id", id);
+                return;
+            }
+
+            if (!newArr[id].className.includes("dijkstra") &&
+                !newArr[id].className.includes("filippa")) {
+                newArr[id].className += " sciezka";
+            }
+        });
+
+        console.log("Path drawn on board:", newArr);
+        return newArr;
+    });
+    }, [path, width, height]);
 
     return (
         <div>
@@ -122,21 +173,30 @@ export default function Board({ height, width }: BoardSize) {
                 }}
             >
                 {fields.map((f) => (
-                    <div key={f.id} className={f.className} onClick={disabled ? undefined : () => setObs(f.id)} ></div>
+                    <div
+                        key={f.id}
+                        className={f.className}
+                        onClick={disabled ? undefined : () => setObs(f.id)}
+                    ></div>
                 ))}
             </div>
+
             <button onClick={randomObs} style={{ marginTop: "10px" }}>
                 Dodaj przeszkody
             </button>
+
             <button onClick={resetBoard} style={{ marginTop: "10px" }}>
                 Resetuj plansze
             </button>
+
             <button onClick={Choosing} style={{ marginTop: "10px" }}>
                 {disabled ? "Zacznij stawianie" : "Zatrzymaj stawianie"}
             </button>
+
             <button onClick={sendToBackend} style={{ marginTop: "10px" }}>
-                Wyznacz œcie¿kê (A*)
+                Wyznacz Å›cieÅ¼kÄ™ (A*)
             </button>
+
         </div>
     );
 }

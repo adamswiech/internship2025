@@ -62,3 +62,4 @@ nunit-*.xml
 /Julian Fałat/MVC-TEST
 /Arek/webowka1/.vs
 PathfindingFullStack/.vs/
+PathfindingFullStack/.vscode/launch.json
