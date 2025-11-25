@@ -16,7 +16,7 @@ namespace PathfindingFullStack.Server
                           .AllowAnyMethod());
             });
 
-            List<Point> board = new List<Point>(PathfindingAlgorithm.FindPath(10, 10)); 
+            
 
             builder.Services.AddControllers();
             
@@ -24,6 +24,11 @@ namespace PathfindingFullStack.Server
             
             var app = builder.Build();
 
+            app.MapPost("/api/path", async (Data payload) =>
+            {
+                return Results.Ok(new { received = payload });
+            });
+            List<Point> board = new List<Point>(PathfindingAlgorithm.FindPath(10, 10));
             app.UseCors();
             app.UseDefaultFiles();
             app.MapStaticAssets();
@@ -33,8 +38,6 @@ namespace PathfindingFullStack.Server
             {
                 app.MapOpenApi();
             }
-
-            app.UseHttpsRedirection();
 
             app.UseAuthorization();
 

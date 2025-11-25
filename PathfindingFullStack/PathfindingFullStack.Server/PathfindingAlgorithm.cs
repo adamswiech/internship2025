@@ -14,16 +14,16 @@ namespace PathfindingFullStack.Server
 
             int[] startingPosition = new int[2];
             int[] targetPosition = new int[2];
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < width; i++)
             {
-                for (int j = 0; j < 10; j++)
+                for (int j = 0; j < height; j++)
                 {
                     board.Add(new Point(i, j));
                 }
             }
             startingPosition[0] = 0;
             startingPosition[1] = 0;
-            targetPosition[0] = 8;
+            targetPosition[0] = 9;
             targetPosition[1] = 6;
 
             
