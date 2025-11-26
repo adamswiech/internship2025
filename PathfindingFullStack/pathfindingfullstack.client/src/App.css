@@ -2,7 +2,7 @@ body{
   margin: 0;
   display: flex;
   justify-content: center;
-}//usestatic files metadane t³umaczenie
+}
 body>div>div{
     display:flex;
     justify-content:center;

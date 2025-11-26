@@ -4,6 +4,8 @@ import "../App.css";
 interface Field {
     id: number;
     className: string;
+    type: string;
+    z: number;
 }
 
 interface BoardSize {
@@ -28,7 +30,7 @@ export default function Board({ height, width }: BoardSize) {
         const arr: Field[] = [];
 
         for (let i = 0; i < size; i++) {
-            arr.push({ id: i, className: "pole" });
+            arr.push({ id: i, className: "pole", z: 0, type:"" });
         }
 
         const posDijkstra = Math.floor(Math.random() * size);
@@ -48,7 +50,7 @@ export default function Board({ height, width }: BoardSize) {
         for (let i = 0; i < 5; i++) {
             const id = Math.floor(Math.random() * size);
 
-            if (id !== posD && id !== posF) {
+            if (id !== posD && id !== posF && !newArr[id].className.includes("sciezka")) {
                 newArr[id].className = "przeszkoda";
             }
         }
@@ -118,7 +120,12 @@ export default function Board({ height, width }: BoardSize) {
         });
     }
     function drawPath() {
-        const newArr = [...fields];
+           const newArr = fields.map(f => {
+        if (f.className.includes("sciezka")) {
+            return { ...f, className: "pole" };
+        }
+        return { ...f };
+    })
 
         path.forEach(p => {
             const id = p.xPosition * width + p.yPosition;
@@ -132,9 +139,9 @@ export default function Board({ height, width }: BoardSize) {
     }
 
     useEffect(() => {
+        setPath([]);
         const board = generateBoard();
         setFields(board);
-        setPath([]);
     }, [height, width]);
 
     useEffect(() => {
