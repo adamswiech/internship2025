@@ -42,3 +42,7 @@ body>div>div{
 .sciezka{
   background-color: beige;
 }
+#wymiary{
+    display:flex;
+    justify-content:center;
+}
