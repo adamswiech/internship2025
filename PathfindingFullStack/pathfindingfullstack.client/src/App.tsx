@@ -16,8 +16,8 @@ return (
               min={10}
               value={width}
               onChange={(e) => setWidth(Number(e.target.value))} />
-      </div>
-      <div id="duzyBen">
+        </div>
+        <div id="duzyBen" style={{ width: `${width*50}px` }}>
         <Board height={height} width={width}>
         </Board>
       </div>
