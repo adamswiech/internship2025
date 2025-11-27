@@ -45,4 +45,8 @@ body>div>div{
 #wymiary{
     display:flex;
     justify-content:center;
+    margin-top:10px;
+}
+#wymiary>input{
+    width:50px;
 }

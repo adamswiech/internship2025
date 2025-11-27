@@ -174,9 +174,15 @@ export default function Board({ height, width }: BoardSize) {
             <div
                 className="board"
                 style={{
+                    /*
                     display: "grid",
                     gridTemplateColumns: `repeat(${width}, 1fr)`,
                     gridTemplateRows: `repeat(${height}, 1fr)`,
+                    */
+                    display: "flex",
+                    flexWrap: "wrap",
+                    height: "fit-content",
+                    width:"fit-content",
                 }}
             >
                 {fields.map((f) => (
