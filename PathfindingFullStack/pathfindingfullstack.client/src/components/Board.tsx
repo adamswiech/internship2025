@@ -4,8 +4,12 @@ import "../App.css";
 interface Field {
     id: number;
     className: string;
-    type: string;
+    type: "Blank" | "Path" | "Obstacle" | "Dijkstra" | "Filippa";
     z: number;
+    previous?: {
+        type: Field["type"];
+        className: string;
+    };
 }
 
 interface BoardSize {
@@ -20,38 +24,43 @@ interface Point {
 }
 
 export default function Board({ height, width }: BoardSize) {
-    const [fields, setFields] = useState<Field[]>([]);
+    const [fields, setFields] = useState<Field[]>(()=>generateBoard());
     const [disabled, setDisabled] = useState(true);
     const [path, setPath] = useState<Point[]>([]);
 
-    const size = height * width;
 
     function generateBoard(): Field[] {
         const arr: Field[] = [];
+        const size = height * width;
 
         for (let i = 0; i < size; i++) {
-            arr.push({ id: i, className: "pole", z: 0, type:"" });
+            arr.push({ id: i, className: "pole", z: 0, type:"Blank" });
         }
-
-        const posDijkstra = Math.floor(Math.random() * size);
-        const posFilippa = Math.floor(Math.random() * size);
+        let posDijkstra = Math.floor(Math.random() * size);
+        let posFilippa = Math.floor(Math.random() * size);
+        while (posFilippa === posDijkstra) {
+        posFilippa = Math.floor(Math.random() * size);
+        }
 
         arr[posDijkstra].className += " dijkstra";
         arr[posFilippa].className += " filippa";
+        arr[posDijkstra].type = "Dijkstra";
+        arr[posFilippa].type = "Filippa";
 
         return arr;
     }
 
     function randomObs() {
-        const posD = fields.findIndex(f => f.className.includes("dijkstra"));
-        const posF = fields.findIndex(f => f.className.includes("filippa"));
+        const posD = fields.findIndex(f => f.type.includes("Dijkstra"));
+        const posF = fields.findIndex(f => f.type.includes("Filippa"));
         const newArr = [...fields];
 
         for (let i = 0; i < 5; i++) {
-            const id = Math.floor(Math.random() * size);
+            const id = Math.floor(Math.random() * (width * height));
 
-            if (id !== posD && id !== posF && !newArr[id].className.includes("sciezka")) {
+            if (id !== posD && id !== posF) {
                 newArr[id].className = "przeszkoda";
+                newArr[id].type = "Obstacle";
             }
         }
 
@@ -69,18 +78,44 @@ export default function Board({ height, width }: BoardSize) {
     }
 
     function setObs(id: number) {
-        const newArr = [...fields];
-        if (newArr[id].className === "pole")
-            newArr[id].className = "przeszkoda";
-        else if (newArr[id].className === "przeszkoda")
-            newArr[id].className = "pole";
+            setFields(prev =>
+            prev.map(field => {
+            if (field.id === id && (field.type === "Dijkstra" || field.type === "Filippa")) return field;
+            if (field.id !== id) return field;
 
-        setFields(newArr);
+        if (field.type !== "Obstacle") {
+            return {
+            ...field,
+            previous: {
+                type: field.type,
+                className: field.className
+            },
+            type: "Obstacle",
+            className: "przeszkoda"
+            };
+        }
+
+        if (field.previous) {
+            return {
+            ...field,
+            type: field.previous.type,
+            className: field.previous.className,
+            previous: undefined
+            };
+        }
+
+        return { 
+            ...field, 
+            type: "Blank", 
+            className: "pole" 
+        };
+        })
+    );
     }
 
     async function sendToBackend() {
-        const posDijkstra = fields.find(f => f.className.includes("dijkstra"))!;
-        const posFilippa = fields.find(f => f.className.includes("filippa"))!;
+        const posDijkstra = fields.find(f => f.type.includes("Dijkstra"))!;
+        const posFilippa = fields.find(f => f.type.includes("Filippa"))!;
 
         const obstacles = fields
             .filter(f => f.className.includes("przeszkoda"))
@@ -89,7 +124,7 @@ export default function Board({ height, width }: BoardSize) {
                 YPosition: f.id % width,
                 value: 0
             }));
-
+            
         const payload = {
             width,
             height,
@@ -116,7 +151,6 @@ export default function Board({ height, width }: BoardSize) {
         console.log("Received path:", path.board);
         path.board.forEach((p, i) => {
         console.log(`Point ${i}:`, p, "X:", p.xPosition, "Y:", p.yPosition);
-        drawPath();
         });
     }
     function drawPath() {
@@ -139,35 +173,13 @@ export default function Board({ height, width }: BoardSize) {
     }
 
     useEffect(() => {
-        setPath([]);
         const board = generateBoard();
         setFields(board);
     }, [height, width]);
 
     useEffect(() => {
-    if (path.length === 0) return;
-
-    setFields(prevFields => {
-        const newArr = [...prevFields];
-
-        path.forEach(p => {
-            const id = p.xPosition * width + p.yPosition;
-
-            if (!newArr[id]) {
-                console.log("Warning: field undefined for id", id);
-                return;
-            }
-
-            if (!newArr[id].className.includes("dijkstra") &&
-                !newArr[id].className.includes("filippa")) {
-                newArr[id].className += " sciezka";
-            }
-        });
-
-        console.log("Path drawn on board:", newArr);
-        return newArr;
-    });
-    }, [path, width, height]);
+        drawPath()
+    },[path]);
 
     return (
         <div>
