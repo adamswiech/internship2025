@@ -28,7 +28,7 @@ namespace PathfindingFullStack.Server
             app.MapPost("/api/path", async (Data payload) =>
             {
                 Console.WriteLine($"START: {payload.start?.XPosition}, {payload.start?.YPosition}");
-                List<Point> board = new List<Point>(PathfindingAlgorithm.FindPath(payload.height, payload.width,payload.start,payload.end,payload.obstacles));
+                List<Point> board = new List<Point>(PathfindingAlgorithm.FindPath(payload.height, payload.width,payload.start,payload.end,payload.allfields,payload.obstacles));
                 return Results.Ok(new { received = payload , board = board});
             });
             

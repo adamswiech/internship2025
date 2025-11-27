@@ -4,14 +4,16 @@
     {
         public int XPosition { get; set; }
         public int YPosition { get; set; }
-
+        
+        public int ZPosition { get; set; }
         public int value { get; set; }
         public Point() { }
-        public Point(int x, int y)
+        public Point(int x, int y, int z = 0)
         {
-            XPosition   = x;
+            XPosition = x;
             YPosition = y;
-            value = 0;
+            ZPosition = z;
+            //value = 0;
         }
     }
 }
