@@ -117,6 +117,13 @@ export default function Board({ height, width }: BoardSize) {
         const posDijkstra = fields.find(f => f.type.includes("Dijkstra"))!;
         const posFilippa = fields.find(f => f.type.includes("Filippa"))!;
 
+        const allfields = fields.map(f => ({
+                XPosition: Math.floor(f.id / width),
+                YPosition: f.id % width,
+                value: 0
+            }));
+
+        
         const obstacles = fields
             .filter(f => f.className.includes("przeszkoda"))
             .map(f => ({
@@ -136,6 +143,7 @@ export default function Board({ height, width }: BoardSize) {
                 XPosition: Math.floor(posFilippa.id / width),
                 YPosition: posFilippa.id % width,
             },
+            allfields,
             obstacles
         };
 
