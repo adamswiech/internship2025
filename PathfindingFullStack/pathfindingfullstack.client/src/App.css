@@ -29,6 +29,7 @@ body>div>div{
 
 .przeszkoda{
   background-color: black;
+  width:50px;
 }
 
 .dijkstra{
