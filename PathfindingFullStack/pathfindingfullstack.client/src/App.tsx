@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import "./App.css";
 import Board from "./components/Board";
 
@@ -21,11 +21,15 @@ function App() {
     const [height, setHeight] = useState(10);
     const [width, setWidth] = useState(10);
     const [checked, setChecked] = useState(false);
-    function handleResize() {
-        setWidth(Math.floor(innerWidth / 50))
-        setHeight(Math.floor(innerHeight / 50)-2)
-        console.log(innerHeight)
-    }
+    const handleResize = useCallback(() => {
+        setWidth(Math.floor(innerWidth / 50));
+        setHeight(Math.floor(innerHeight / 50) - 2);
+    }, [setWidth, setHeight]);
+    //function handleResize() {
+    //    setWidth(Math.floor(innerWidth / 50))
+    //    setHeight(Math.floor(innerHeight / 50)-2)
+    //    console.log(innerHeight)
+    //}
     useEffect(() => {
         if (checked) {
             window.addEventListener("resize", handleResize);
@@ -49,13 +53,15 @@ return (
         <div id="wymiary">wymiary
             
         <input type="number"
-              min={10}
+                min={10}
+                placeholder="y"
               //value={height}
               onBlur={(e) => checkHeight(Number(e.target.value))}/>
         <input type="number"
               min={10}
-              max={30}
-              //value={width}
+                max={30}
+                placeholder="x"
+            //value={width}
               onBlur={(e) => checkWidth(Number(e.target.value))} />
         </div>
         <div id="duzyBen" style={{ width: `${width * 50}px`, height: `${height * 50}px` }}>
