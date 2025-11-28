@@ -13,7 +13,6 @@
             XPosition = x;
             YPosition = y;
             ZPosition = z;
-            //value = 0;
         }
     }
 }

@@ -47,21 +47,12 @@ export default function Board({ height, width }: BoardSize) {
     const [fields, setFields] = useState<Field[]>(()=>generateBoard());
     const [disabled, setDisabled] = useState(true);
     const [path, setPath] = useState<Point[]>([]);
-<<<<<<< Updated upstream
+
     function generateValue() {
         const value: number = Math.floor(Math.random() * 5) + 1;
         return value;
     }
-=======
 
-    function generateValue() {
-        const value: number = Math.floor(Math.random() * 5) + 1;
-        return value;
-    }   
- 
-
-
->>>>>>> Stashed changes
     function generateBoard(): Field[] {
         const arr: Field[] = [];
         const size = height * width;

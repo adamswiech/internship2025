@@ -8,7 +8,6 @@
         public int g;
         public int h;
         public int f;
-        //public int a;
         public nod parent;
         public nod(int x, int y,int z, int g, int h, nod parent)
         {
@@ -18,7 +17,6 @@
             this.h = h;
             this.f = g + h;
             this.z = z;
-           // this.a = z + g + h;
             this.parent = parent;
         }
     }
