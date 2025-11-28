@@ -1,10 +1,9 @@
 interface Props {
     z: number;
 }
-
-export default function Blank({ z }: Props) {
+export default function Filippa({ z }: Props) {
     return (
-        <div className="pole">
+        <div className="pole filippa">
             {z}
         </div>
     );

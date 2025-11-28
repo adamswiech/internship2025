@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
 import "../App.css";
+import Blank from "./fields/Blank";
+import Dijkstra from "./fields/Dijkstra";
+import Filippa from "./fields/Filippa";
+import Obstacle from "./fields/Obstacle";
+import Path from "./fields/Path";
 
 interface Field {
     id: number;
@@ -22,21 +27,48 @@ interface Point {
     yPosition: number;
     value: number;
 }
+function FieldRenderer(field: Field) {
+    const { type, z } = field;
+
+    const components = {
+        Blank,
+        Path,
+        Obstacle,
+        Dijkstra,
+        Filippa
+    };
+
+    const Component = components[type];
+
+    return <Component/>;
+}
 
 export default function Board({ height, width }: BoardSize) {
     const [fields, setFields] = useState<Field[]>(()=>generateBoard());
     const [disabled, setDisabled] = useState(true);
     const [path, setPath] = useState<Point[]>([]);
+<<<<<<< Updated upstream
     function generateValue() {
         const value: number = Math.floor(Math.random() * 5) + 1;
         return value;
     }
+=======
+
+    function generateValue() {
+        const value: number = Math.floor(Math.random() * 5) + 1;
+        return value;
+    }   
+ 
+
+
+>>>>>>> Stashed changes
     function generateBoard(): Field[] {
         const arr: Field[] = [];
         const size = height * width;
 
         for (let i = 0; i < size; i++) {
-            arr.push({ id: i, className: "pole", z: 0, type:"Blank" });
+            let z = generateValue()
+            arr.push({ id: i, className: "pole", z: z, type:"Blank" });
         }
         let posDijkstra = Math.floor(Math.random() * size);
         let posFilippa = Math.floor(Math.random() * size);
@@ -122,7 +154,8 @@ export default function Board({ height, width }: BoardSize) {
         const allfields = fields.map(f => ({
                 XPosition: Math.floor(f.id / width),
                 YPosition: f.id % width,
-                value: 0
+                value: 0,
+                ZPosition: f.z
             }));
 
         
@@ -212,7 +245,7 @@ export default function Board({ height, width }: BoardSize) {
                         key={f.id}
                         className={f.className}
                         onClick={disabled ? undefined : () => setObs(f.id)}
-                    ></div>
+                    >{f.z}</div>
                 ))}
             </div>
 
