@@ -34,7 +34,7 @@ function App() {
         if (checked) {
             window.addEventListener("resize", handleResize);
             setWidth(Math.floor(innerWidth / 50))
-            setHeight(Math.floor(innerHeight / 50)-1)
+            setHeight(Math.floor(innerHeight / 50)-2)
             
         } else {
             window.removeEventListener("resize", handleResize);
