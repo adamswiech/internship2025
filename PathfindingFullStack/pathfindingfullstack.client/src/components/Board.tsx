@@ -27,8 +27,10 @@ export default function Board({ height, width }: BoardSize) {
     const [fields, setFields] = useState<Field[]>(()=>generateBoard());
     const [disabled, setDisabled] = useState(true);
     const [path, setPath] = useState<Point[]>([]);
-
-
+    function generateValue() {
+        const value: number = Math.floor(Math.random() * 5) + 1;
+        return value;
+    }
     function generateBoard(): Field[] {
         const arr: Field[] = [];
         const size = height * width;
